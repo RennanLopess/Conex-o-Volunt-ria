@@ -87,3 +87,36 @@ if (document.getElementById('necessidadeForm')) {
         this.reset();
     });
 }
+
+// Exibir necessidades
+function exibirNecessidades(lista) {
+  const container = document.getElementById("listaNecessidades");
+  const mensagemVazia = document.getElementById("mensagemVazia");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (lista.length === 0) {
+    // Se a lista estiver vazia, exibe a mensagem
+    mensagemVazia.textContent = "Nenhuma necessidade encontrada.";
+    return;
+  }
+
+  mensagemVazia.textContent = "";
+
+  // Para cada necessidade, cria um card e exibe os dados
+  lista.forEach((n) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <h3>${n.titulo}</h3>
+      <p><strong>Instituição:</strong> ${n.instituicao}</p>
+      <p><strong>Tipo:</strong> ${n.tipoAjuda}</p>
+      <p><strong>Descrição:</strong> ${n.descricao}</p>
+      <p><strong>Endereço:</strong> ${n.rua}, ${n.bairro}, ${n.cidade} - ${n.estado}</p>
+      <p><strong>Contato:</strong> ${n.contato}</p>
+    `;
+    container.appendChild(card);
+  });
+}
