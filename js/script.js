@@ -1,27 +1,89 @@
 // Função para validar CPF
 function validarCPF(cpf) {
-  // Remove tudo que não for número
-  cpf = cpf.replace(/[^\d]+/g, '');
+    // Remove tudo que não for número
+    cpf = cpf.replace(/[^\d]+/g, '');
 
-  // Verifica se o CPF tem 11 dígitos ou se são todos iguais
-  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+    // Verifica se o CPF tem 11 dígitos ou se são todos iguais
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 
-  // Validação do primeiro dígito verificador
-  let soma = 0, resto;
-  for (let i = 1; i <= 9; i++)
-    soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
-  resto = (soma * 10) % 11;
-  if (resto === 10 || resto === 11) resto = 0;
-  if (resto !== parseInt(cpf.substring(9, 10))) return false;
+    // Validação do primeiro dígito verificador
+    let soma = 0, resto;
+    for (let i = 1; i <= 9; i++)
+        soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) return false;
 
-  // Validação do segundo dígito verificador
-  soma = 0;
-  for (let i = 1; i <= 10; i++)
-    soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
-  resto = (soma * 10) % 11;
-  if (resto === 10 || resto === 11) resto = 0;
-  if (resto !== parseInt(cpf.substring(10, 11))) return false;
+    // Validação do segundo dígito verificador
+    soma = 0;
+    for (let i = 1; i <= 10; i++)
+        soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) return false;
 
-  // CPF válido
-  return true;
+    // CPF válido
+    return true;
+}
+
+
+
+// Cadastrar necessidade
+if (document.getElementById('necessidadeForm')) {
+    document.getElementById('necessidadeForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Captura e limpa os dados do formulário
+        const instituicao = document.getElementById("instituicao").value.trim();
+        const cpf = document.getElementById("cpf").value.trim();
+        const tipoAjuda = document.getElementById("tipoAjuda").value;
+        const titulo = document.getElementById("titulo").value.trim();
+        const descricao = document.getElementById("descricao").value.trim();
+        const cep = document.getElementById("cep").value.trim();
+        const rua = document.getElementById("rua").value.trim();
+        const bairro = document.getElementById("bairro").value.trim();
+        const cidade = document.getElementById("cidade").value.trim();
+        const estado = document.getElementById("estado").value.trim();
+        const contato = document.getElementById("contato").value.trim();
+        const mensagem = document.getElementById("mensagem");
+
+        // Valida o CPF antes de continuar
+        if (!validarCPF(cpf)) {
+            mensagem.textContent = "CPF inválido.";
+            mensagem.style.color = "red";
+            return;
+        }
+
+        // Verifica se todos os campos obrigatórios estão preenchidos
+        if (!instituicao || !tipoAjuda || !titulo || !descricao || !cep || !rua || !bairro || !cidade || !estado || !contato) {
+            mensagem.textContent = "Por favor, preencha todos os campos obrigatórios.";
+            mensagem.style.color = "red";
+            return;
+        }
+
+        // Cria objeto com os dados da necessidade
+        const necessidade = {
+            instituicao,
+            cpf,
+            tipoAjuda,
+            titulo,
+            descricao,
+            cep,
+            rua,
+            bairro,
+            cidade,
+            estado,
+            contato
+        };
+
+        // Salva no localStorage
+        let lista = JSON.parse(localStorage.getItem("necessidades")) || [];
+        lista.push(necessidade);
+        localStorage.setItem("necessidades", JSON.stringify(lista));
+
+        // Exibe mensagem de sucesso e limpa o formulário
+        mensagem.textContent = "Necessidade cadastrada com sucesso!";
+        mensagem.style.color = "green";
+        this.reset();
+    });
 }
