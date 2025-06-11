@@ -120,3 +120,36 @@ function exibirNecessidades(lista) {
     container.appendChild(card);
   });
 }
+
+// Filtro e Busca
+if (document.getElementById("listaNecessidades")) {
+  const todas = JSON.parse(localStorage.getItem("necessidades")) || [];
+  const inputBusca = document.getElementById("busca");
+  const filtroTipo = document.getElementById("filtroTipo");
+
+  // Aplica o filtro baseado no texto digitado e no tipo escolhido
+  function aplicarFiltros() {
+    const termo = inputBusca.value.toLowerCase();
+    const tipoSelecionado = filtroTipo.value;
+
+    const filtradas = todas.filter((n) => {
+      const correspondeBusca =
+        n.titulo.toLowerCase().includes(termo) ||
+        n.descricao.toLowerCase().includes(termo);
+
+      const correspondeTipo = !tipoSelecionado || n.tipoAjuda === tipoSelecionado;
+
+      return correspondeBusca && correspondeTipo;
+    });
+
+    // Exibe somente as necessidades filtradas
+    exibirNecessidades(filtradas);
+  }
+
+  // Executa a filtragem a cada mudança nos campos
+  inputBusca.addEventListener("input", aplicarFiltros);
+  filtroTipo.addEventListener("change", aplicarFiltros);
+  
+  // Mostra todas ao carregar a página
+  exibirNecessidades(todas);
+}
