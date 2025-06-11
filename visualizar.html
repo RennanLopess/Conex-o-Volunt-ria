@@ -174,3 +174,14 @@
                 location.reload();
             }
         };
+
+        // Confirmação para excluir item
+        function confirmarExclusao(index) {
+            indexParaExcluir = index;
+            document.getElementById("modalConfirmacao").style.display = "flex";
+        }
+        // Cancelar exclusão
+        document.getElementById("cancelarExcluir").onclick = () => {
+            indexParaExcluir = null;
+            document.getElementById("modalConfirmacao").style.display = "none";
+        };
