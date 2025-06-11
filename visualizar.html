@@ -185,3 +185,12 @@
             indexParaExcluir = null;
             document.getElementById("modalConfirmacao").style.display = "none";
         };
+        // Confirma e remove item do localStorage
+        document.getElementById("confirmarExcluir").onclick = () => {
+            const lista = JSON.parse(localStorage.getItem("necessidades")) || [];
+            if (indexParaExcluir !== null) {
+                lista.splice(indexParaExcluir, 1);
+                localStorage.setItem("necessidades", JSON.stringify(lista));
+                location.reload();
+            }
+        };
