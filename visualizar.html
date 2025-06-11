@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visualizar Necessidades</title>
-  <link rel="stylesheet" href="css/style_moderno.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualizar Necessidades</title>
+    <link rel="stylesheet" href="css/style_moderno.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <header>
-    <h1>Conexão Voluntária</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="cadastrar.html">Cadastrar Necessidade</a>
-      <a href="visualizar.html">Ver Necessidades</a>
-    </nav>
-  </header>
+    <header>
+        <h1>Conexão Voluntária</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cadastrar.html">Cadastrar Necessidade</a>
+            <a href="visualizar.html">Ver Necessidades</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Necessidades Cadastradas</h2>
+
+        <div class="filtros">
+            <input type="text" id="busca" placeholder="Buscar por título ou descrição..." />
+            <select id="filtroTipo">
+                <option value="">Todos os Tipos</option>
+                <option>Educação</option>
+                <option>Saúde</option>
+                <option>Meio Ambiente</option>
+                <option>Doação de Alimentos</option>
+                <option>Doação de Roupas</option>
+                <option>Outros</option>
+            </select>
+        </div>
+
+        <div id="listaNecessidades" class="cards-container"></div>
+        <p id="mensagemVazia" class="mensagem"></p>
+    </main>
