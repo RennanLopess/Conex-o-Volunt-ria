@@ -144,3 +144,14 @@
                 card.appendChild(acoes);
             });
         }
+
+        // Abre o modal de edição com os dados preenchidos
+        function editarNecessidade(index) {
+            const lista = JSON.parse(localStorage.getItem("necessidades")) || [];
+            const item = lista[index];
+            document.getElementById("editarTitulo").value = item.titulo;
+            document.getElementById("editarDescricao").value = item.descricao;
+            document.getElementById("editarContato").value = item.contato;
+            indexParaEditar = index;
+            document.getElementById("modalEdicao").style.display = "flex";
+        }
