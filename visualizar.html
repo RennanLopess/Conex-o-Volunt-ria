@@ -161,4 +161,16 @@
             indexParaEditar = null;
             document.getElementById("modalEdicao").style.display = "none";
         };
-        
+
+        // Salvar edição no localStorage
+        document.getElementById("salvarEdicao").onclick = () => {
+            const lista = JSON.parse(localStorage.getItem("necessidades")) || [];
+            if (indexParaEditar !== null) {
+                lista[indexParaEditar].titulo = document.getElementById("editarTitulo").value.trim();
+                lista[indexParaEditar].descricao = document.getElementById("editarDescricao").value.trim();
+                lista[indexParaEditar].contato = document.getElementById("editarContato").value.trim();
+                localStorage.setItem("necessidades", JSON.stringify(lista));
+                document.getElementById("modalEdicao").style.display = "none";
+                location.reload();
+            }
+        };
