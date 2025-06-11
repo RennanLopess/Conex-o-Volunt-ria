@@ -155,3 +155,10 @@
             indexParaEditar = index;
             document.getElementById("modalEdicao").style.display = "flex";
         }
+
+        // Cancelar edição
+        document.getElementById("cancelarEditar").onclick = () => {
+            indexParaEditar = null;
+            document.getElementById("modalEdicao").style.display = "none";
+        };
+        
