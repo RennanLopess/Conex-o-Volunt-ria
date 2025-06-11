@@ -127,3 +127,20 @@
             border-radius: 6px;
         }
     </style>
+    <script src="js/script.js"></script>
+    <script>
+        let indexParaExcluir = null;
+        let indexParaEditar = null;
+        // Adiciona os botões de editar e excluir aos cards carregados
+        function adicionarBotoes() {
+            const cards = document.querySelectorAll(".card");
+            cards.forEach((card, index) => {
+                const acoes = document.createElement("div");
+                acoes.className = "acoes";
+                acoes.innerHTML = `
+        <button class="btn-acoes editar" onclick="editarNecessidade(${index})">Editar</button>
+        <button class="btn-acoes excluir" onclick="confirmarExclusao(${index})">Excluir</button>
+        `;
+                card.appendChild(acoes);
+            });
+        }
