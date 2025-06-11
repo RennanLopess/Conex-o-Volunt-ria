@@ -194,3 +194,11 @@
                 location.reload();
             }
         };
+        // Espera os cards serem renderizados antes de inserir botões neles
+        window.addEventListener("DOMContentLoaded", () => {
+            setTimeout(adicionarBotoes, 200);
+        });
+    </script>
+</body>
+
+</html>
