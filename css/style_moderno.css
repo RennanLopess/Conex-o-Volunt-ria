@@ -14,3 +14,36 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+/* Cabeçalho */
+header {
+  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+  color: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+nav a:hover {
+  opacity: 0.8;
+}
+
